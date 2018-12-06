@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>TodoList</title>
+    <!-- <script type="text/javascript" src="./vue.js"></script> -->
+    <script type="text/javascript" src="./jquery.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <input id="input" type="text">
+        <button id="btn">提交</button>
+        <ul id="ul"></ul>
+    </div>
+    <script type="text/javascript">
+
+        function Page() {
+            
+        }
+
+        $.extend(Page.prototype, {
+            init: function () {
+                this.bindEvents()
+            },
+            bindEvents: function () {
+                var btn = $('#btn')
+                btn.on('click', $.proxy(this.handleBtnClick, this))
+            },
+            handleBtnClick: function () {
+                var input = $('#input')
+                var inputEl = input.val()
+                var ulEL = $('#ul')
+                ulEL.append('<li>'+inputEl+'</li>')
+                input.val('')
+            }
+        })
+
+        var page = new Page()
+        page.init()
+    </script>
+</body>
+
+</html>
