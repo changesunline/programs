@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>字体放大镜</title>
+	<script type="text/javascript" src="./vue.js"></script>
+</head>
+<body>
+	<div id="emp">
+		<div v-for='post in posts' 
+			 :style="{fontSize: postFontsize + 'px'}"
+			 class="content">
+			<blog v-bind:post="post"
+				  v-on:enlarge='enlargeText'>
+			</blog>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		Vue.component('blog',{
+			props:['post'],
+			template: `
+			<div class="blog-content">
+				<h3>{{post.title}}</h3>
+				<div>{{post.content}}</div>
+				<button v-on:click="$emit('enlarge',1)">Enlarge</button>
+			</div>
+			`
+		})
+
+		new Vue({
+			el: '#emp',
+			data: {
+				posts: [
+					{title:'My journey with Vue',content:'你好My journey'},
+					{title:'Blogging with Vu',content:'你好Blog'},
+					{title:'Why Vue is so fun',content:'你好vue'}
+				],
+				postFontsize: 16
+			},
+			methods:{
+				enlargeText: function (enlargeAmount) {
+					return this.postFontsize += enlargeAmount
+				}
+			}
+		})
+
+	</script>
+</body>
+</html>
