@@ -1,0 +1,9 @@
+{
+	// 文件配置"useBuiltIns"可以开启polyfill，就是补丁，可以完整的模拟es2015+的环境
+  "presets": [
+  	["@babel/preset-env",{
+  		"useBuiltIns": "usage"
+  	}]
+  ]
+  // "presets": ["@babel/preset-env"]
+}
