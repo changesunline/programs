@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>条件显示</title>
+	<script type="text/javascript" src="vue.js"></script>
+</head>
+<body>
+	<div id="box">
+		<!-- <button @click="handleClick">切换</button> -->
+		<h1 @click="handleClick"
+			v-if="show">  <!-- 整个元素，绑定的组件会被销毁 -->
+			你好，VUE
+		</h1>
+		<h1 @click="handleClick"
+			v-show="show">  <!-- 不会被销毁 -->
+			你好，VUE
+		</h1>
+	</div>
+
+	<script type="text/javascript">
+		var vm = new Vue({
+			el: "#box",
+			data:{
+				message: "",
+				show: true
+			},
+			methods: {
+				handleClick: function () {
+					this.show = !this.show
+				}
+			}
+		})
+	</script>
+</body>
+</html>

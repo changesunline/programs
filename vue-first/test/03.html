@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>点击切换</title>
+	<script type="text/javascript" src="vue.js"></script>
+	<style type="text/css">
+		.active{
+			color: #B200FF;
+		}
+		h1{
+			cursor: pointer;
+		}
+	</style>
+</head>
+<body>
+	
+	<div id="box">
+		<h1 :class="{active: isActived}"
+			@click="handleClick">{{message}}</h1>
+
+		<p :style="[styobj,{'font-weight': '700'}]">this is style</p>
+
+	</div>
+
+	<script type="text/javascript">
+		new Vue({
+			el: '#box',
+			// template: `
+			// 	<h1 :class="{active: isActived}"
+			// 		@click="handleClick">{{message}}</h1>
+			// `,
+			data: {
+				message: 'hello world',
+				isActived: true,
+				styobj: {
+					color: "red",
+					"font-size": "25px", //kebab-case需要用引号
+					// fontWeight: "700" //camelCase不需要用引号
+				}
+			},
+			methods: {
+				handleClick: function () {
+					this.isActived = !this.isActived
+				}
+			}
+
+		})
+	</script>
+
+</body>
+</html>
