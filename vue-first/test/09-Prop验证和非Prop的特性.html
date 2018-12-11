@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Prop验证和非Prop的特性</title>
+	<script type="text/javascript" src="vue.js"></script>
+</head>
+<body>
+
+	<div id="root">
+		<!-- 非props特性会把count="5"显示出来，而props特性不会 -->
+		<counter :count="5"></counter>
+	</div>
+
+	<script type="text/javascript">
+		Vue.component("counter",{
+			props:{
+				count: {
+					type: Number,
+					required: true,
+					default: 0,
+					validator: function (value) {
+						return value >= 5
+					}
+				}
+			},
+			template: `<h1>{{count}}</h1>`
+		})
+
+		var vm = new Vue({
+			el: "#root",
+			data: {
+
+			}
+		})
+	</script>
+</body>
+</html>

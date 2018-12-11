@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>作用域插槽</title>
+	<script type="text/javascript" src="vue.js"></script>
+</head>
+<body>
+
+	<div id="root">
+		<child>
+			<h1 slot="header">TodoList</h1>
+			<template slot-scope="itemProps">
+				<li>{{itemProps.item}}——你好</li>
+			</template>
+			<h2 slot="footer">footer</h2>
+		</child>
+		
+	</div>
+
+	<script type="text/javascript">
+
+		Vue.component("child",{
+			data: function () {
+				return {
+					stus: [1,2,3,4,5,6]
+				}
+			},
+			template: `
+			<div>
+				<ul>
+					<slot name="header"></slot>
+					<slot v-for="item of stus"
+						  :item="item">
+					</slot>
+					<slot name="footer"></slot>
+				</ul>
+			</div>`
+		})
+		
+		var vm = new Vue({
+			el: "#root",
+			data: {
+
+			}
+		})
+	</script>
+</body>
+</html>

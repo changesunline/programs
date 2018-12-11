@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>template</title>
+	<script type="text/javascript" src="vue.js"></script>
+</head>
+<body>
+
+	<div id="root">
+		<component :is="type"></component>
+		<!-- <child-one v-if="type === 'child-one'"></child-one>
+		<child-two v-if="type === 'child-two'"></child-two> -->
+		<button @click="handleClick">切换</button>
+	</div>
+
+	<script type="text/javascript">
+		Vue.component("child-one",{
+			template:`<h1 v-once>child-one</h1>`
+		})
+		Vue.component("child-two",{
+			template:`<h1 v-once>child-two</h1>`
+		})
+		var vm = new Vue({
+			el: "#root",
+			data: {
+				type: "child-one"
+			},
+			methods:{
+				handleClick: function () {
+					this.type = this.type === "child-one" ? "child-two" : "child-one"
+				}
+			}
+		})
+	</script>
+</body>
+</html>

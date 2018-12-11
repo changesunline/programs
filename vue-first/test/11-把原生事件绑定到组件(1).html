@@ -2,27 +2,27 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>template</title>
+	<title>把原生事件绑定到组件(1)</title>
 	<script type="text/javascript" src="vue.js"></script>
 </head>
 <body>
 
 	<div id="root">
-		<compo></compo>
+		<child @click.native="handle"></child>
 	</div>
 
 	<script type="text/javascript">
-		var compo = {
+		Vue.component("child",{
+			template: `<h3>你好</h3>`,
 
-		}
-
-		var vm = new Vue({
+		})
+		
+		new Vue({
 			el: "#root",
-			components: {
-				componentA: compo
-			}
-			data: {
-
+			methods:{
+				handle: function () {
+					console.log("nihao")
+				}
 			}
 		})
 	</script>

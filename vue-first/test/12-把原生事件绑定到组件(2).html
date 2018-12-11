@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>把原生事件绑定到组件(2)</title>
+	<script type="text/javascript" src="vue.js"></script>
+</head>
+<body>
+
+	<div id="root">
+		<child @focus.native="onFocus"
+			   :label="title">
+		</child>
+	</div>
+
+	<script type="text/javascript">
+		Vue.component("child",{
+			props: ["label","value"],
+			computed: {
+			    inputListeners: function () {
+			      this = that
+			      // `Object.assign` 将所有的对象合并为一个新对象
+			      return Object.assign({},
+			        // 我们从父级添加所有的监听器
+			        that.$listeners,
+			        // 然后我们添加自定义监听器，
+			        // 或覆写一些监听器的行为
+			        {
+			          // 这里确保组件配合 `v-model` 的工作
+			          focus: function () {
+			          	alert("onFocus")
+			          }
+			        }
+			      )
+			    }
+			  },
+			template: `
+				<label>
+				  {{ label }}
+				  <input
+				    v-bind="$attrs"
+				    v-bind:value="value"
+				    v-on:input="$emit('input', $event.target.value)"
+				  >
+				</label>`,
+		})
+		
+		new Vue({
+			el: "#root",
+			data:{
+				title: "把原生事件绑定到组件"
+			},
+			methods:{
+				onFocus: function () {
+					alert("onFocus")
+				}
+			}
+		})
+	</script>
+</body>
+</html>
